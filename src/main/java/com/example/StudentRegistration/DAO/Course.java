@@ -1,49 +1,48 @@
 package com.example.StudentRegistration.DAO;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "CourseTable")
 public
 class Course {
-
+// @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    Long courseId;
-    String courseName;
+    Long courseid;
+    String coursename;
 
-    @ManyToOne
-    Student studentMap;
+    @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
+    private Set<Student> students = new HashSet<>();
 
     public
     Course() {
     }
 
     public
-    Course(Long courseId, String courseName) {
-        this.courseId = courseId;
-        this.courseName = courseName;
+    Course(Long courseid, String coursename) {
+        this.courseid = courseid;
+        this.coursename = coursename;
     }
 
     public
     Long getCourseId() {
-        return courseId;
+        return courseid;
     }
 
     public
     void setCourseId(Long courseId) {
-        this.courseId = courseId;
+        this.courseid = courseId;
     }
 
     public
     String getCourseName() {
-        return courseName;
+        return coursename;
     }
 
     public
     void setCourseName(String courseName) {
-        this.courseName = courseName;
+        this.coursename = coursename;
     }
 }
